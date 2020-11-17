@@ -1,12 +1,8 @@
-import 'package:FiapEx/screens/assignment_deliveries_screen.dart';
-import 'package:FiapEx/screens/assignment_screen.dart';
 import 'package:FiapEx/screens/login_screen.dart';
-import 'package:FiapEx/screens/new_roll_call_screen.dart';
-import 'package:FiapEx/screens/new_scheme_screen.dart';
-import 'package:FiapEx/screens/row_call_history_screen.dart';
-import 'package:FiapEx/screens/row_call_screen.dart';
-import 'package:FiapEx/screens/scheme_screen.dart';
+import 'package:FiapEx/screens/robot_list_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'screens/new_robot_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,28 +29,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       onGenerateRoute: (RouteSettings settings){
         switch (settings.name) {
-          case '/scheme':
-            return  MaterialPageRoute(
-              builder: (_) => new SchemeScreen(),
-              settings: settings,
-            );
-          
-          case '/assignment_deliveries':
-            return  MaterialPageRoute(
-              builder: (_) => new AssignmentDeliveriesScreen(assignment: settings.arguments),
-              settings: settings,
-            );
 
           case '/':
             return MaterialPageRoute(
-              builder: (_) => RowCallHistoryScreen(),
+              builder: (_) => RobotListScreen(),
               settings: settings,
-            );
-
-          case '/rowcall':
-            return MyCustomRoute(
-              builder: (_) => RowCallScreen(settings.arguments),
-              settings: settings
             );
 
           case '/login':
@@ -62,21 +41,15 @@ class MyApp extends StatelessWidget {
               builder: (_) => LoginScreen(),
               settings: settings
             );
+
           case '/new':
-            return MaterialPageRoute(
-              builder: (_) => NewRowCallScreen(),
-              settings: settings
-            );
-          case '/new_scheme':
-            return MaterialPageRoute(
-              builder: (_) => NewSchemeScreen(),
-              settings: settings
-            );
+          return MyCustomRoute(
+            builder: (_) => NewRobotScreen(),
+            settings: settings
+          );
+        
           default: 
-            return MaterialPageRoute(
-              builder: (_) => RowCallScreen(settings.arguments),
-              settings: settings,
-            );
+            return null;
         }
       },
       initialRoute: '/login'
