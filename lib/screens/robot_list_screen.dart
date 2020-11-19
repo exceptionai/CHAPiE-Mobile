@@ -24,7 +24,7 @@ class _RobotListScreenState extends State<RobotListScreen> {
         child: InkWell(
           child: Image.asset('assets/images/entregatrabalhos.png', height: 26),
           onTap: () {
-            Navigator.of(context).pushReplacementNamed('/scheme');
+            Navigator.of(context).pushReplacementNamed('/schema');
           },
         ),
       )),

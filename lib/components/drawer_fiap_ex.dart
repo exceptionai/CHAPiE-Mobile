@@ -96,15 +96,15 @@ class _DrawerFiapExState extends State<DrawerFiapEx> {
                 height: 30,
               ),
               InkWell(
-                              child: Row(
-                                children: <Widget>[
+                child: Row(
+                   children: <Widget>[
 
                     widget.route == '/' ? 
                     Icon(
                       Icons.arrow_right,
                       color: Theme.of(context).primaryColor,
                     ) : Padding(padding: EdgeInsets.only(left:25),),
-                                  Text(
+                  Text(
                   'LISTAGEM DE ROBÔS',
                   style: TextStyle(
                       fontSize: 18.0,
@@ -134,7 +134,7 @@ class _DrawerFiapExState extends State<DrawerFiapEx> {
               InkWell(
                 child: Row(
                   children: <Widget>[
-                    widget.route == '/scheme' ? 
+                    widget.route == '/schema' ? 
                     Icon(
                       Icons.arrow_right,
                       color: Theme.of(context).primaryColor,
@@ -148,13 +148,13 @@ class _DrawerFiapExState extends State<DrawerFiapEx> {
                             fontSize: 18.0,
                             fontFamily: 'GothamHTF',
                             fontWeight: FontWeight.bold,
-                            color: _routeColor('/scheme',context)),
+                            color: _routeColor('/schema',context)),
                       ),
                     ),
                   ],
                 ),
                 onTap: (){
-                  Navigator.of(context).pushReplacementNamed('/scheme');
+                  Navigator.of(context).pushReplacementNamed('/schema');
                 },
               ),
               SizedBox(

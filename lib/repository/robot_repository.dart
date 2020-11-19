@@ -10,7 +10,7 @@ class RobotRepository{
   final String idColumn = DbConnection.robotTable["idColumn"];
   final String nameColumn = DbConnection.robotTable["nameColumn"];
   final String doneColumn = DbConnection.robotTable["robotTypeColumn"];
-  final String dateColumn = DbConnection.robotTable["schemaUrlColumn"];
+  final String schemaColumn = DbConnection.robotTable["schemaUrlColumn"];
  
   Future<List<RobotModel>> getAll() async {
     Database db = await dbConnection.db;

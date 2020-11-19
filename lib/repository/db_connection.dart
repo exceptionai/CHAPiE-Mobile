@@ -15,6 +15,13 @@ class DbConnection {
     "doneColumn" : "done"
   };
 
+  static final schemaTable = {
+    "tableName" : "schemas",
+    "idColumn" : "idSchema",
+    "nameColumn" : "schema",
+    "schemaUrlColumn" : "schemaUrl"
+  };
+
   DbConnection();
 
   Database _db;
@@ -43,6 +50,10 @@ class DbConnection {
           ${robotTable["robotTypeColumn"]} TEXT,
           ${robotTable["schemaUrlColumn"]} TEXT,
           ${robotTable["doneColumn"]} INTEGER);""",
+          """CREATE TABLE ${schemaTable["tableName"]}(
+          ${schemaTable["idColumn"]} INTEGER PRIMARY KEY,
+          ${schemaTable["nameColumn"]} TEXT,
+          ${schemaTable["schemaUrlColumn"]} TEXT);""",
     ];
 
 
@@ -52,17 +63,34 @@ class DbConnection {
         ${robotTable["nameColumn"]},
         ${robotTable["robotTypeColumn"]},
         ${robotTable["schemaUrlColumn"]},
-        ${robotTable["doneColumn"]}) VALUES (1,'Chapie Coense','Chavoso','chapie',1);""",
+        ${robotTable["doneColumn"]}) VALUES (1,'Chapie Coense','Android','assets/images/android.jpq',1);""",
         """INSERT INTO ${robotTable["tableName"]} (${robotTable["idColumn"]},
         ${robotTable["nameColumn"]},
         ${robotTable["robotTypeColumn"]},
         ${robotTable["schemaUrlColumn"]},
-        ${robotTable["doneColumn"]}) VALUES (2,'Robaru Akombi','Ladrão','rabaru',0);""",
+        ${robotTable["doneColumn"]}) VALUES (2,'Robaru Akombi','Babá','assets/images/baby-syster.jpg',0);""",
         """INSERT INTO ${robotTable["tableName"]} (${robotTable["idColumn"]},
         ${robotTable["nameColumn"]},
         ${robotTable["robotTypeColumn"]},
         ${robotTable["schemaUrlColumn"]},
-        ${robotTable["doneColumn"]}) VALUES (3,'kagaru Nakama','Cagão','cagaru',1);""",
+        ${robotTable["doneColumn"]}) VALUES (3,'kagaru Nakama','Operário','assets/images/worker.jpg',1);""",
+         """INSERT INTO ${schemaTable["tableName"]} (
+        ${schemaTable["idColumn"]},
+        ${schemaTable["nameColumn"]},
+        ${schemaTable["schemaUrlColumn"]}) VALUES (1,'Android','assets/images/android.jpg');""",
+                 """INSERT INTO ${schemaTable["tableName"]} (
+        ${schemaTable["idColumn"]},
+        ${schemaTable["nameColumn"]},
+        ${schemaTable["schemaUrlColumn"]}) VALUES (2,'Babá','assets/images/baby-syster.jpg');""",
+                 """INSERT INTO ${schemaTable["tableName"]} (
+        ${schemaTable["idColumn"]},
+        ${schemaTable["nameColumn"]},
+        ${schemaTable["schemaUrlColumn"]}) VALUES (3,'Operário','assets/images/worker.jpg');""",
+        """INSERT INTO ${schemaTable["tableName"]} (
+        ${schemaTable["idColumn"]},
+        ${schemaTable["nameColumn"]},
+        ${schemaTable["schemaUrlColumn"]}) VALUES (4,'Militar','assets/images/military.jpg');""",
+
     ];
 
     return await openDatabase(path, version: 1, onConfigure: _onConfigure, onCreate: (Database db, int newerVersion) async {

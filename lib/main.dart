@@ -1,5 +1,7 @@
 import 'package:FiapEx/screens/login_screen.dart';
+import 'package:FiapEx/screens/new_schema_screen.dart';
 import 'package:FiapEx/screens/robot_list_screen.dart';
+import 'package:FiapEx/screens/scheme_list_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/new_robot_screen.dart';
@@ -35,6 +37,18 @@ class MyApp extends StatelessWidget {
               builder: (_) => RobotListScreen(),
               settings: settings,
             );
+
+          case '/schema':
+            return MaterialPageRoute(
+              builder: (_) => SchemaListScreen(),
+              settings: settings,
+          );
+
+          case '/newSchema':
+            return MaterialPageRoute(
+              builder: (_) => NewSchemaScreen(),
+              settings: settings,
+          );
 
           case '/login':
             return MyCustomRoute(
