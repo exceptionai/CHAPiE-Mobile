@@ -4,6 +4,7 @@ import 'package:FiapEx/models/schema.dart';
 import 'package:FiapEx/services/charpie_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:image_picker/image_picker.dart';
 
 class NewSchemaScreen extends StatefulWidget {
   @override
@@ -17,12 +18,23 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
 
+
+   
   @override
   Widget build(BuildContext context) {
     print("teste");
     final widthScreen = MediaQuery.of(context).size.width;
     final heightScreen = MediaQuery.of(context).size.height;
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+                heroTag: "button",
+                onPressed: () async {
+                  _saveSchema();
+                  setState(() {});
+                },
+                child: Text("Salvar"),
+                backgroundColor: Theme.of(context).primaryColor,
+              ),
       appBar: AppBarFiapEx(
         action: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -122,7 +134,10 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
                     ),
                     child: RaisedButton(
                       color: Theme.of(context).accentColor,
-                      onPressed: () {},
+                      onPressed:() { 
+                        _showImageOption(context);
+                        print(schema.schemaUrl);
+                      },
                       child: Column(
                         children: [
                           Container(
@@ -151,5 +166,64 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
         ),
       ),
     );
+  }
+
+  void  _showImageOption(context){
+    showModalBottomSheet(
+      context: context,
+      builder: (context){
+        return BottomSheet(
+          onClosing: (){},
+          builder:(context){
+            return Container(
+              padding: EdgeInsets.all(40.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  FlatButton(
+                    onPressed: (){
+                      ImagePicker.pickImage(source: ImageSource.gallery).then((file){
+                        if(file == null) return;
+                        setState(() {
+                          schema.schemaUrl = file.path;
+                          Navigator.pop(context);
+                        });
+                      });
+                    }, 
+                    child: Text("galeria",style:TextStyle(color: Colors.red,fontSize: 20.0)),
+                  )
+                  ,
+                    FlatButton(
+                    onPressed: (){
+                      ImagePicker.pickImage(source: ImageSource.camera).then((file){
+                        if(file == null) return;
+                        setState(() {
+                          schema.schemaUrl = file.path;
+                          Navigator.pop(context);
+                        });
+                      });
+                    }, 
+                    child: Text("camera",style:TextStyle(color: Colors.red,fontSize: 20.0)),
+                  )
+                ],
+              ),
+            );
+        }
+      );
+      }
+    );
+  }
+
+  void _saveSchema() async {
+    
+    schema.id = await service.getNextSchemaId();
+    schema.name = _nameController.text;
+    schema.description = _descriptionController.text;
+    print(schema.toString());
+    await service.saveSchema(schema);
+    setState(() {
+     
+    });
   }
 }

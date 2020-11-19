@@ -19,7 +19,9 @@ class DbConnection {
     "tableName" : "schemas",
     "idColumn" : "idSchema",
     "nameColumn" : "schema",
-    "schemaUrlColumn" : "schemaUrl"
+    "schemaUrlColumn" : "schemaUrl",
+    "descriptionColumn" : "description",
+    
   };
 
   DbConnection();
@@ -53,7 +55,8 @@ class DbConnection {
           """CREATE TABLE ${schemaTable["tableName"]}(
           ${schemaTable["idColumn"]} INTEGER PRIMARY KEY,
           ${schemaTable["nameColumn"]} TEXT,
-          ${schemaTable["schemaUrlColumn"]} TEXT);""",
+          ${schemaTable["schemaUrlColumn"]} TEXT,
+          ${schemaTable["descriptionColumn"]} TEXT);""",
     ];
 
 

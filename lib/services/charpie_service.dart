@@ -25,8 +25,17 @@ class CharpieService{
      return id;
    }
 
+  getNextSchemaId() async {
+     int id = await schemaRepository.getNextID();
+     return id;
+  }
+
   Future<RobotModel> saveRobot(RobotModel model) async {
     return robotRepository.save(model);
+  }
+
+  Future<SchemaModel> saveSchema(SchemaModel model) async {
+    return schemaRepository.save(model);
   }
 
 

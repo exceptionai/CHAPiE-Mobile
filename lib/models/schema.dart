@@ -28,6 +28,7 @@ class SchemaModel {
       schemaUrlColumn : schemaUrl,
       descriptionColumn : description
     };
+    print(map.toString());
     return map;
   }
 
