@@ -1,21 +1,26 @@
+import 'package:FiapEx/models/robot.dart';
 import 'package:flutter/material.dart';
 
 class RobotForm extends StatelessWidget {
   final String textField;
-  final List<Map<String, Object>> fieldOptions;
-  final void Function() next;
-  final void Function() previous;
+  final List<Map<String, Object>> fieldOptions; 
+  final void Function(Map<String,Object>) next;
+  final void Function(Map<String,Object>) previous;
+  final void Function(int) onPressed;
+  final int selectedOption;
 
   RobotForm({
     @required this.textField,
     @required this.fieldOptions,
     @required this.next,
     @required this.previous,
+    @required this.onPressed,
+    @required this.selectedOption
   });
 
   @override
   Widget build(BuildContext context) {
-    print(textField);
+    final nameController = TextEditingController();
     if (fieldOptions == null) {
       return Container(
           padding: EdgeInsets.all(8.0),
@@ -23,18 +28,17 @@ class RobotForm extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           child: Container(
             width: 50,
-            margin: EdgeInsets.only(top: 100.0),
+            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
             child: Column(
               children: [
                 Container(
-                  height: 60,
+                  height: MediaQuery.of(context).size.height * 0.2,
                   child: Text(
                     textField,
                     textAlign: TextAlign.center,
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 50),
                   width: MediaQuery.of(context).size.width * 0.8,
                   decoration: BoxDecoration(
                     border: Border.all(color: Theme.of(context).primaryColor),
@@ -42,6 +46,7 @@ class RobotForm extends StatelessWidget {
                   ),
                   child: TextFormField(
                       textAlign: TextAlign.center,
+                      controller: nameController,
                       style: TextStyle(
                         color: Theme.of(context).primaryColorLight,
                       ),
@@ -58,12 +63,12 @@ class RobotForm extends StatelessWidget {
                       )),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 360),
+                  margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.328),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       RaisedButton(
-                        onPressed: previous,
+                        onPressed: () => previous({'value':'','field' : 'name'}),
                         padding: EdgeInsets.all(15),
                         child: Icon(
                           Icons.keyboard_arrow_left,
@@ -78,7 +83,7 @@ class RobotForm extends StatelessWidget {
                         width: 50,
                       ),
                       RaisedButton(
-                        onPressed: next,
+                        onPressed: () => next({'value':nameController.text,'field' : 'name'}),
                         padding: EdgeInsets.all(15),
                         child: Icon(
                           Icons.keyboard_arrow_right,
@@ -96,35 +101,33 @@ class RobotForm extends StatelessWidget {
             ),
           ));
     } else {
+      var i;
       return Container(
           padding: EdgeInsets.all(8.0),
           color: Theme.of(context).accentColor,
           width: MediaQuery.of(context).size.width,
           child: Container(
               width: 50,
-              margin: EdgeInsets.only(top: 100.0),
+              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
               child: Column(
                 children: [
                   Container(
-                    height:60,
+                    height:MediaQuery.of(context).size.height * 0.1,
                     child: Text(
                       textField,
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  Container(
-                    height: 60,
-                  ),
                   SizedBox(                   
-                    height: 400,
+                    height: MediaQuery.of(context).size.height * 0.5,
                     width: 250,                    
                     child: ListView.builder(
                       itemCount: fieldOptions.length,
                       itemBuilder: (context, index) {
-                        print(fieldOptions[index]['text']);
+                        i = index;
                         return Container(
                           margin: EdgeInsets.only(top:15),
-                          child: RaisedButton(   
+                          child: RaisedButton(                               
                             padding: EdgeInsets.all(15),                                                   
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),
@@ -135,8 +138,12 @@ class RobotForm extends StatelessWidget {
                                 color: Colors.black,
                               ),
                             ),
-                            onPressed: () {},
-                            color: Theme.of(context).primaryColor,                          
+                            
+                            onPressed:() {
+                                onPressed(index);
+                            }
+                            ,
+                            color: index == selectedOption ? Colors.white :  Theme.of(context).primaryColor,
                           ),
                         );
                       },
@@ -146,7 +153,7 @@ class RobotForm extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       RaisedButton(
-                        onPressed: previous,
+                        onPressed: () => previous({'value': null}),
                         padding: EdgeInsets.all(15),
                         child: Icon(
                           Icons.keyboard_arrow_left,
@@ -161,7 +168,7 @@ class RobotForm extends StatelessWidget {
                         width: 50,
                       ),
                       RaisedButton(
-                        onPressed: next,
+                        onPressed: () => next(fieldOptions[i]),
                         padding: EdgeInsets.all(15),
                         child: Icon(
                           Icons.keyboard_arrow_right,

@@ -13,8 +13,7 @@ class RobotModel {
   final String robotTypeColumn = DbConnection.robotTable["robotTypeColumn"];
   final String schemaUrlColumn = DbConnection.robotTable["schemaUrlColumn"];
   final String doneColumn = DbConnection.robotTable["doneColumn"];
-  
-  
+
   RobotModel();
 
   RobotModel.fromMap(Map map){
@@ -33,8 +32,6 @@ class RobotModel {
     };
     return map;
   }
-  
-
 
   
 }

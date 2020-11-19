@@ -12,5 +12,15 @@ class CharpieService{
     return rows;
   }
 
+  getNextID() async {
+     int id = await repository.getNextID();
+     return id;
+   }
+
+  Future<RobotModel> saveRobot(RobotModel model) async {
+    return repository.save(model);
+  }
+
+
 
 }

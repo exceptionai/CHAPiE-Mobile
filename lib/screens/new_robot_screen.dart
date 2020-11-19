@@ -1,6 +1,7 @@
 import 'package:FiapEx/components/app_bar_fiap_ex.dart';
 import 'package:FiapEx/components/drawer_fiap_ex.dart';
 import 'package:FiapEx/components/robot_form_ex.dart';
+import 'package:FiapEx/components/robot_form_ex_statelful.dart';
 import 'package:FiapEx/models/robot.dart';
 import 'package:FiapEx/services/charpie_service.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +14,16 @@ class NewRobotScreen extends StatefulWidget {
 
 class _NewRobotScreenState extends State<NewRobotScreen> {
   CharpieService service = CharpieService();
+  var robot = RobotModel();
 
   final _form = const [
     {
-      'text': 'Qual será o nome do robô?'
+      'text': 'Qual será o nome do robô?',
+      'field' : 'name',
     },
     {
       'text': 'Qual será o tipo do robô?',
+      'field' : 'robotType',
       'options': [
         {'text': 'Android', 'value': 'android'},
         {'text': 'Babysister', 'value': 'babysyster'},
@@ -29,6 +33,7 @@ class _NewRobotScreenState extends State<NewRobotScreen> {
     },
     {
       'text': 'Selecione um esquema para manufatura do robô?',
+      'field' : 'schemaUrl',
       'options': [
         {'text': 'Ousadasso', 'value' : 'ousadasso'},
         {'text': 'Super ousadao', 'value' : 'super ousado'},
@@ -38,34 +43,13 @@ class _NewRobotScreenState extends State<NewRobotScreen> {
     },
     {
       'text': 'Deseja concluir a construção?',
+      'field' : 'submit',
       'options': [
         {'text': 'Sim', 'value' : 1},
         {'text': 'Não', 'value' : 0},
       ],
     },
   ];
-  
-  var _currentField = 0;
-  var _robot = RobotModel();
-
-  void _next(){
-      setState(() {
-        if(_currentField >= _form.length - 1){
-          _currentField = _form.length - 1;
-        }else{
-           _currentField ++;
-        }
-      });
-    }
-
-    void _previous(){
-      setState(() {
-        if(_currentField != 0){
-          _currentField --;
-        }
-          
-      });
-    }
 
   @override
   Widget build(BuildContext context) {
@@ -85,11 +69,7 @@ class _NewRobotScreenState extends State<NewRobotScreen> {
         drawer: DrawerFiapEx(
           route: '/',
         ),
-        body: RobotForm(
-        textField: _form[_currentField]['text'],
-        fieldOptions: _form[_currentField]['options'],
-        next: _next,
-        previous: _previous),
+        body: RobotForm2(form:_form),
       );
   }
 }

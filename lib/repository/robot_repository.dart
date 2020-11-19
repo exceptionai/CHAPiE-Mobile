@@ -60,6 +60,11 @@ class RobotRepository{
     return Sqflite.firstIntValue(await db.rawQuery("SELECT COUNT(*) FROM $table"));
   }
 
+  Future<int> getNextID() async {
+    Database db = await dbConnection.db;
+    return Sqflite.firstIntValue(await db.rawQuery("SELECT COUNT(*) FROM $table")) + 1;
+  }
+
   Future close() async {
     Database db = await dbConnection.db;
     db.close();
