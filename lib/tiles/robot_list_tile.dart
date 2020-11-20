@@ -54,11 +54,25 @@ class _RobotListTileState extends State<RobotListTile> {
                   Text('${robotModel.robotType}', style: TextStyle(fontSize: 16)),
                 ],
               ),
+              SizedBox(
+                height: 8,
+              ),
+              (robotModel.done == 1) ? Row(
+                children: <Widget>[
+                  Text('Status: ', style: TextStyle(fontSize: 14)),
+                  Text('Pronto', style: TextStyle(fontSize: 16)),
+                ],
+              ) : Row(
+                children: <Widget>[
+                  Text('Status: ', style: TextStyle(fontSize: 14)),
+                  Text('Construindo', style: TextStyle(fontSize: 16)),
+                ],
+              )
               
             ],
           ),
           leading: 
-             widget?.robotModel?.done != null && widget.robotModel.done == 0 ? Padding(
+             widget?.robotModel?.done != null && widget.robotModel.done == 1 ? Padding(
                 padding: const EdgeInsets.only(top:8.0),
                 child: Image.asset(
                     'assets/images/presenteicone.png',
@@ -67,9 +81,8 @@ class _RobotListTileState extends State<RobotListTile> {
                 )
               : Padding(
                   padding: const EdgeInsets.only(top: 8.0),
-                  child: Image.asset(
-                    'assets/images/pendenteicone.png',
-                    width: 40,
+                  child: CircularProgressIndicator(
+                    backgroundColor: Theme.of(context).primaryColor,                    
                   ),
                 ),
         ),

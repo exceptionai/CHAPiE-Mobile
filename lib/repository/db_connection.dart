@@ -71,7 +71,7 @@ class DbConnection {
         ${robotTable["nameColumn"]},
         ${robotTable["robotTypeColumn"]},
         ${robotTable["schemaUrlColumn"]},
-        ${robotTable["doneColumn"]}) VALUES (2,'Robaru Akombi','Babá','assets/images/baby-syster.jpg',0);""",
+        ${robotTable["doneColumn"]}) VALUES (2,'Robaru Akombi','Babá','assets/images/baby-syster.jpg',1);""",
         """INSERT INTO ${robotTable["tableName"]} (${robotTable["idColumn"]},
         ${robotTable["nameColumn"]},
         ${robotTable["robotTypeColumn"]},
