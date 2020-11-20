@@ -16,6 +16,11 @@ class _SchemaListScreenState extends State<SchemaListScreen> {
   CharpieService service = CharpieService();
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarFiapEx(
@@ -31,8 +36,7 @@ class _SchemaListScreenState extends State<SchemaListScreen> {
       floatingActionButton: FloatingActionButton(
                 heroTag: "button",
                 onPressed: () async {
-                  await Navigator.of(context).pushNamed('/newSchema');
-                  setState(() {});
+                  await Navigator.of(context).pushReplacementNamed('/newSchema');
                 },
                 child: Icon(Icons.exposure_plus_1,color: Theme.of(context).accentColor,),
                 backgroundColor: Theme.of(context).primaryColor,

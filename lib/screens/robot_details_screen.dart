@@ -19,6 +19,44 @@ class RobotDetailsScreen extends StatefulWidget {
 class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
   CharpieService service = CharpieService();
 
+
+  confirmSelfDestruction(){
+    showDialog(
+      context: context, 
+      builder: (_) => AlertDialog(
+        backgroundColor: Theme.of(context).accentColor,
+        title: Text('Auto Destuição',style: TextStyle(color: Theme.of(context).primaryColor),),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(bottomRight: Radius.circular(15), topLeft: Radius.circular(15))),
+        content: 
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text('Deseja que o robô ${widget.robotModel.name} se auto destrua?', style: TextStyle(color: Colors.white),),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  FlatButton(child: Text('Sim', style: TextStyle(fontWeight: FontWeight.bold,color: Theme.of(context).primaryColor,fontSize: 18)),onPressed: (){
+                    selfDestruct();
+                    },),
+                  FlatButton(child: Text('Não', style: TextStyle(fontWeight: FontWeight.bold,color: Theme.of(context).primaryColor,fontSize: 18)),onPressed: (){Navigator.of(context).pop();},),
+                ],
+              ),
+              
+            ],
+          ),
+        elevation: 24,
+        
+      ),
+      barrierDismissible: true);
+  
+  }
+
+  selfDestruct() async{
+    service.selfDestruct(widget.robotModel.getServiceId());
+    await Navigator.of(context).pushReplacementNamed('/');
+  }
+
   @override
   Widget build(BuildContext context) {
     final widthScreen = MediaQuery.of(context).size.width;
@@ -38,9 +76,10 @@ class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
       floatingActionButton: FloatingActionButton(
         heroTag: "button",
         onPressed: () async {
-          setState(() {});
+          confirmSelfDestruction();
         },
-        child: Text("autodestruir"),
+        
+        child: Image.asset('assets/images/bomb-detonation.png'),
         backgroundColor: Theme.of(context).primaryColor,
       ),
       drawer: DrawerFiapEx(
@@ -48,16 +87,12 @@ class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
       ),
       body: SingleChildScrollView(
           child: Container(
-          margin: EdgeInsets.only(
-            left: widthScreen * 0.07,
-          ),
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 55),
           color: Theme.of(context).accentColor,
-          width: MediaQuery.of(context).size.width * 0.8,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

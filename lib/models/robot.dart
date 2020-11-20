@@ -3,6 +3,7 @@ import 'package:FiapEx/repository/db_connection.dart';
 class RobotModel {
 
   int id;
+  String _id;
   String name;
   String robotType;
   String schemaUrl;
@@ -18,6 +19,7 @@ class RobotModel {
 
   RobotModel.fromMap(Map map){
     id = map[idColumn];
+    _id = map["_id"];
     name = map[nameColumn];
     robotType = map[robotTypeColumn];
     schemaUrl = map[schemaUrlColumn];
@@ -33,5 +35,8 @@ class RobotModel {
     return map;
   }
 
-  
+  String getServiceId(){
+    return _id;
+  }
+
 }

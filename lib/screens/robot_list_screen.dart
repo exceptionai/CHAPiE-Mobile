@@ -13,7 +13,15 @@ class RobotListScreen extends StatefulWidget {
 }
 
 class _RobotListScreenState extends State<RobotListScreen> {
+
   CharpieService service = CharpieService();
+  Future<List<RobotModel>> futureRobot;
+
+  @override
+  void initState() { 
+    super.initState();
+    futureRobot = service.getAllRobots();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +69,7 @@ class _RobotListScreenState extends State<RobotListScreen> {
                 ),
               ),
               FutureBuilder<List<RobotModel>>(
-                future: service.getAllRobots(),
+                future: futureRobot,
                 builder: (context, snapshot){
                   if(snapshot.connectionState == ConnectionState.done && snapshot.hasData){
                     if(snapshot.data.length > 0){

@@ -220,15 +220,9 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
   }
 
   void _saveSchema() async {
-    
-    schema.id = await service.getNextSchemaId();
     schema.name = _nameController.text;
     schema.description = _descriptionController.text;
-    print(schema.toString());
     await service.saveSchema(schema);
-    setState(() {
-     
-    });
   }
 
 }
