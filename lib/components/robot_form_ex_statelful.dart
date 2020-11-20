@@ -31,13 +31,14 @@ class _RobotForm2State extends State<RobotForm2> {
   };
 
   final _nameController = TextEditingController();
+  final _quantityController = TextEditingController();
 
   void _next() {
     if (_currentField >= widget.form.length - 1) {
       _currentField = widget.form.length - 1;
     } else {
       setState(() {
-        print("fofa");
+        print(widget.form[_currentField]['field']);
         var option;
         if(widget.form[_currentField]['options'] != null){
           List options = widget.form[_currentField]['options'];
@@ -45,8 +46,8 @@ class _RobotForm2State extends State<RobotForm2> {
         }
         switch (widget.form[_currentField]['field']) {
           case 'name':
-            robotMap[DbConnection.robotTable["nameColumn"]] =
-                _nameController.text;
+              robotMap[DbConnection.robotTable["nameColumn"]] =
+                  _nameController.text;
             break;
           case 'robotType':
             robotMap[DbConnection.robotTable["robotTypeColumn"]] =
@@ -58,9 +59,18 @@ class _RobotForm2State extends State<RobotForm2> {
             break;
           default:
         }
-        isInvalid = false;
-        _selectedOption = -1;
-        _currentField++;
+        
+        if(widget.form[_currentField]['field'] == 'name' && _nameController.text == ''){
+          _setInvalid();
+        }else if(widget.form[_currentField]['field'] == 'quantity' && _quantityController.text == ''){
+          print('vazio');
+          _setInvalid();
+        }else{
+          isInvalid = false;
+          _selectedOption = -1;
+          _currentField++;
+        }     
+       
       });
     }}
 
@@ -88,6 +98,8 @@ class _RobotForm2State extends State<RobotForm2> {
             default:
           }
         });
+      }else{
+        Navigator.of(context).pushNamed('/');
       }
     }
 
@@ -99,9 +111,11 @@ class _RobotForm2State extends State<RobotForm2> {
 
     void _submit(int send) async{
       if (send == 1){
-        robotMap[DbConnection.robotTable["idColumn"]] = await widget.service.getNextID();
-        print(robotMap);
-        widget.service.saveRobot(RobotModel.fromMap(robotMap));
+        for(int i = 0; i < int.parse(_quantityController.text); i++){
+          robotMap[DbConnection.robotTable["idColumn"]] = await widget.service.getNextID();
+          print(robotMap);
+          widget.service.saveRobot(RobotModel.fromMap(robotMap));
+        }
       }
       await Navigator.of(context).pushNamed('/');
       setState(() {});
@@ -127,10 +141,24 @@ class _RobotForm2State extends State<RobotForm2> {
                 children: [
                   Container(
                     height: MediaQuery.of(context).size.height * 0.2,
-                    child: Text(
+                    child: (!isInvalid) ? Text(
                       widget.form[_currentField]['text'],
                       textAlign: TextAlign.center,
-                    ),
+                    ) : Column(
+                      children: [
+                        Text(
+                          widget.form[_currentField]['text'],
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          "Favor inserir um valor",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.red,
+                          ),
+                        ),
+                      ],
+                    ), 
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.8,
@@ -140,16 +168,11 @@ class _RobotForm2State extends State<RobotForm2> {
                     ),
                     child: TextFormField(
                         textAlign: TextAlign.center,
-                        controller: _nameController,
+                        keyboardType: (widget.form[_currentField]['field'] == 'name') ? TextInputType.text : TextInputType.number,
+                        controller: (widget.form[_currentField]['field'] == 'name') ?_nameController : _quantityController,
                         style: TextStyle(
                           color: Theme.of(context).primaryColorLight,
                         ),
-                        /*validator: (value) {
-                        if (value.isEmpty) {
-                          return "Campo inválido";
-                        }
-                        return null;
-                      },*/
                         cursorColor: Theme.of(context).primaryColor,
                         cursorHeight: 25.0,
                         decoration: InputDecoration(
@@ -210,15 +233,18 @@ class _RobotForm2State extends State<RobotForm2> {
                     top: MediaQuery.of(context).size.height * 0.1),
                 child: Column(
                   children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.1,
-                      child: Text(
-                        isInvalid == false
-                            ? widget.form[_currentField]['text']
-                            : "${widget.form[_currentField]['text']} Selecione uma opção para prosseguir",
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
+                    Container(                      
+                      height: MediaQuery.of(context).size.height * 0.1,                    
+                      child: (isInvalid == false) ? 
+                        Text(                        
+                          widget.form[_currentField]['text'],
+                          textAlign: TextAlign.center,
+                        )
+                        : Column(children: [
+                          Text(widget.form[_currentField]['text'],textAlign: TextAlign.center,),
+                          Text("Seleciona uma opção!",textAlign: TextAlign.center,style: TextStyle(color: Colors.red)),
+                        ],),                                                  
+                    ),                  
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.5,
                       width: 250,

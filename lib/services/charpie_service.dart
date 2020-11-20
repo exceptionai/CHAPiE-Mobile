@@ -15,6 +15,14 @@ class CharpieService{
     return rows;
   }
 
+  void endProductionOfRobots() async{
+    List<RobotModel> rows = await robotRepository.getAll();
+    rows.forEach((element) {
+      element.done = 1;
+      robotRepository.update(element);
+    });
+  }
+
   Future<List<SchemaModel>> getAllSchemas() async{
     List<SchemaModel> rows = await schemaRepository.getAll();
     return rows;
@@ -37,6 +45,18 @@ class CharpieService{
   Future<SchemaModel> saveSchema(SchemaModel model) async {
     return schemaRepository.save(model);
   }
+
+   Future<List<Map<String,Object>>> GenerateListSchemes() async {
+     List<SchemaModel> schemas = await getAllSchemas();
+     List<Map<String,Object>> formatedSchemas;
+     schemas.forEach((element) {
+       formatedSchemas.add({
+         'text' : element.name,
+         'value' : element.schemaUrl
+        });
+     });
+     return formatedSchemas;
+   }
 
 
 

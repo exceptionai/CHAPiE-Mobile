@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:FiapEx/components/app_bar_fiap_ex.dart';
 import 'package:FiapEx/components/drawer_fiap_ex.dart';
 import 'package:FiapEx/models/robot.dart';
@@ -22,15 +24,19 @@ class _RobotListScreenState extends State<RobotListScreen> {
         action: Padding(
         padding: const EdgeInsets.all(8.0),
         child: InkWell(
-          child: Image.asset('assets/images/entregatrabalhos.png', height: 26),
-          onTap: () {
-            Navigator.of(context).pushReplacementNamed('/schema');
+          child: Icon(Icons.refresh,size: 40,),//Image.asset('assets/images/entregatrabalhos.png', height: 26),
+          onTap: () async {
+            //Navigator.of(context).pushReplacementNamed('/schema');
+            await service.endProductionOfRobots();
+            setState(() {
+              
+            });
           },
         ),
       )),
       floatingActionButton: FloatingActionButton(
                 heroTag: "button",
-                onPressed: () async {
+                onPressed: () async {                  
                   await Navigator.of(context).pushNamed('/new');
                   setState(() {});
                 },

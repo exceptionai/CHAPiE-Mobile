@@ -16,6 +16,9 @@ class _NewRobotScreenState extends State<NewRobotScreen> {
   CharpieService service = CharpieService();
   var robot = RobotModel();
 
+  @override
+  Widget build(BuildContext context) {
+  final schemas =  service.getAllSchemas();
   final _form = const [
     {
       'text': 'Qual será o nome do robô?',
@@ -35,11 +38,15 @@ class _NewRobotScreenState extends State<NewRobotScreen> {
       'text': 'Selecione um esquema para manufatura do robô?',
       'field' : 'schemaUrl',
       'options': [
-        {'text': 'Ousadasso', 'value' : 'ousadasso'},
-        {'text': 'Super ousadao', 'value' : 'super ousado'},
-        {'text': 'Cuzudo', 'value' : 'cuzudo'},
-        {'text': 'Upload de esquema','value' : 'upload'},
+        {'text': 'Android', 'value' : 'assets/images/android.jpg'},
+        {'text': 'Babá', 'value' : 'assets/images/baby-syster.jpg'},
+        {'text': 'Operário', 'value' : 'assets/images/worker.jpg'},
+        {'text': 'Militar','value' : 'assets/images/military.jpg'},
       ],
+    },
+    {
+      'text': 'Quantos gostaria de construir?',
+      'field' : 'quantity',
     },
     {
       'text': 'Deseja concluir a construção?',
@@ -49,10 +56,9 @@ class _NewRobotScreenState extends State<NewRobotScreen> {
         {'text': 'Não', 'value' : 0},
       ],
     },
+    
   ];
 
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBarFiapEx(
