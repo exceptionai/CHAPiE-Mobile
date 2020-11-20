@@ -17,7 +17,7 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
   var schema = SchemaModel();
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
-
+  var uploadedImage = false;
 
    
   @override
@@ -26,11 +26,13 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
     final widthScreen = MediaQuery.of(context).size.width;
     final heightScreen = MediaQuery.of(context).size.height;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
                 heroTag: "button",
                 onPressed: () async {
                   _saveSchema();
-                  setState(() {});
+                  //setState(() {});
+                  Navigator.of(context).pushReplacementNamed('/schema');
                 },
                 child: Text("Salvar"),
                 backgroundColor: Theme.of(context).primaryColor,
@@ -125,7 +127,7 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
                           border: InputBorder.none,
                         )),
                   ),
-                  Container(
+                  Container(                    
                     margin: EdgeInsets.only(top: heightScreen * 0.05),
                     width: widthScreen * 0.7,
                     height: heightScreen * 0.3,
@@ -138,7 +140,8 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
                         _showImageOption(context);
                         print(schema.schemaUrl);
                       },
-                      child: Column(
+                      child: (uploadedImage == false) ?
+                        Column(
                         children: [
                           Container(
                             height: heightScreen * 0.07,
@@ -156,11 +159,11 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
                             ),
                           )
                         ],
-                      ),
+                      ):Image.asset(schema.schemaUrl,width: widthScreen * 0.7),
                     ),
                   ),
                 ],
-              ),
+              )
             ),
           ],
         ),
@@ -184,8 +187,9 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
                   FlatButton(
                     onPressed: (){
                       ImagePicker.pickImage(source: ImageSource.gallery).then((file){
-                        if(file == null) return;
-                        setState(() {
+                        if(file == null) return;                        
+                        setState(() {                          
+                          uploadedImage = true;
                           schema.schemaUrl = file.path;
                           Navigator.pop(context);
                         });
@@ -194,7 +198,7 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
                     child: Text("galeria",style:TextStyle(color: Colors.red,fontSize: 20.0)),
                   )
                   ,
-                    FlatButton(
+                    /*FlatButton(
                     onPressed: (){
                       ImagePicker.pickImage(source: ImageSource.camera).then((file){
                         if(file == null) return;
@@ -205,7 +209,7 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
                       });
                     }, 
                     child: Text("camera",style:TextStyle(color: Colors.red,fontSize: 20.0)),
-                  )
+                  )*/
                 ],
               ),
             );
@@ -226,4 +230,5 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
      
     });
   }
+
 }

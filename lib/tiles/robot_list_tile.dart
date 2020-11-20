@@ -1,4 +1,5 @@
 import 'package:FiapEx/models/robot.dart';
+import 'package:FiapEx/screens/robot_details_screen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -33,9 +34,13 @@ class _RobotListTileState extends State<RobotListTile> {
           fontFamily: 'GothamHTF',),
         ),),
               child: ListTile(
-          onTap: () async {
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => RobotDetailsScreen(robotModel: widget.robotModel,))
+            );
           },
-          title: Column(
+          title: Column(            
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text('${robotModel != null ? robotModel.name : ''}',
