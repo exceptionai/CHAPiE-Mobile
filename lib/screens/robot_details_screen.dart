@@ -87,93 +87,95 @@ class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
       ),
       body: SingleChildScrollView(
           child: Container(
-          padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 55),
+          padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30),
           color: Theme.of(context).accentColor,
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Nome:",
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Theme.of(context).primaryColor,
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Nome:",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          textAlign: TextAlign.justify,
                         ),
-                        textAlign: TextAlign.justify,
-                      ),
-                      Container(
-                        height: heightScreen * 0.01,
-                      ),
-                      Text(
-                        "Tipo:",
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Theme.of(context).primaryColor,
+                        Container(
+                          height: heightScreen * 0.01,
                         ),
-                        textAlign: TextAlign.justify,
-                      ),
-                      Container(
-                        height: heightScreen * 0.01,
-                      ),
-                      Text(
-                        "Função:",
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Theme.of(context).primaryColor,
+                        Text(
+                          "Tipo:",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          textAlign: TextAlign.justify,
                         ),
-                        textAlign: TextAlign.justify,
-                      ),
-                      Container(
-                        height: heightScreen * 0.01,
-                      ),
-                    ],
-                  ),
-                  Container(
-                    width: widthScreen * 0.07,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.robotModel.name,
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Theme.of(context).primaryColorLight,
+                        Container(
+                          height: heightScreen * 0.01,
                         ),
-                        textAlign: TextAlign.justify,
-                      ),
-                      Container(
-                        height: heightScreen * 0.01,
-                      ),
-                      Text(
-                        widget.robotModel.name,
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Theme.of(context).primaryColorLight,
+                        Text(
+                          "Função:",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          textAlign: TextAlign.justify,
                         ),
-                        textAlign: TextAlign.justify,
-                      ),
-                      Container(
-                        height: heightScreen * 0.01,
-                      ),
-                      Text(
-                        "Entregar droga",
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Theme.of(context).primaryColorLight,
+                        Container(
+                          height: heightScreen * 0.01,
                         ),
-                        textAlign: TextAlign.justify,
-                      ),
-                      Container(
-                        height: heightScreen * 0.01,
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                    Container(
+                      width: widthScreen * 0.07,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.robotModel.name,
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Theme.of(context).primaryColorLight,
+                          ),
+                          textAlign: TextAlign.justify,
+                        ),
+                        Container(
+                          height: heightScreen * 0.01,
+                        ),
+                        Text(
+                          widget.robotModel.name,
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Theme.of(context).primaryColorLight,
+                          ),
+                          textAlign: TextAlign.justify,
+                        ),
+                        Container(
+                          height: heightScreen * 0.01,
+                        ),
+                        Text(
+                          "Travar batalhas",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Theme.of(context).primaryColorLight,
+                          ),
+                          textAlign: TextAlign.justify,
+                        ),
+                        Container(
+                          height: heightScreen * 0.01,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               Container(
                 height: heightScreen * 0.02,

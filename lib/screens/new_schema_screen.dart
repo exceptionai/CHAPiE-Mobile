@@ -22,7 +22,6 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
    
   @override
   Widget build(BuildContext context) {
-    print("teste");
     final widthScreen = MediaQuery.of(context).size.width;
     final heightScreen = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -142,8 +141,7 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
                     child: RaisedButton(
                       color: Theme.of(context).accentColor,
                       onPressed:() { 
-                        _showImageOption(context);
-                        print(schema.schemaUrl);
+                        _showImageOption(context);                        
                       },
                       child: (uploadedImage == false) ?
                         Column(
