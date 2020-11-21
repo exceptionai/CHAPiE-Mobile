@@ -151,7 +151,7 @@ class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
                           height: heightScreen * 0.01,
                         ),
                         Text(
-                          widget.robotModel.name,
+                          widget.robotModel.robotType,
                           style: TextStyle(
                             fontSize: 20.0,
                             color: Theme.of(context).primaryColorLight,
