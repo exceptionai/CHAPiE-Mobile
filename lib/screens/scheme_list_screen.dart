@@ -36,6 +36,7 @@ class _SchemaListScreenState extends State<SchemaListScreen> {
       floatingActionButton: FloatingActionButton(
                 heroTag: "button",
                 onPressed: () async {
+                  setState((){});
                   await Navigator.of(context).pushReplacementNamed('/newSchema');
                 },
                 child: Icon(Icons.exposure_plus_1,color: Theme.of(context).accentColor,),
