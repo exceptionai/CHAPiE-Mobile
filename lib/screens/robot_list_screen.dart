@@ -15,7 +15,16 @@ class RobotListScreen extends StatefulWidget {
 }
 
 class _RobotListScreenState extends State<RobotListScreen> {
+
   CharpieService service = CharpieService();
+  Future<List<RobotModel>> futureRobot;
+
+  @override
+  void initState() { 
+    super.initState();
+    futureRobot = service.getAllRobots();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +37,11 @@ class _RobotListScreenState extends State<RobotListScreen> {
           onTap: () async {
             //Navigator.of(context).pushReplacementNamed('/schema');
             await service.endProductionOfRobots();
+            futureRobot = service.getAllRobots();
             setState(() {
               
             });
+            
           },
         ),
       )),
@@ -38,7 +49,6 @@ class _RobotListScreenState extends State<RobotListScreen> {
                 heroTag: "button",
                 onPressed: () async {                  
                   await Navigator.of(context).pushNamed('/new');
-                  setState(() {});
                 },
                 child: Icon(Icons.exposure_plus_1,color: Theme.of(context).accentColor,),
                 backgroundColor: Theme.of(context).primaryColor,
@@ -67,7 +77,7 @@ class _RobotListScreenState extends State<RobotListScreen> {
                 ),
               ),
               FutureBuilder<List<RobotModel>>(
-                future: service.getAllRobots(),
+                future: futureRobot,
                 builder: (context, snapshot){
                   if(snapshot.connectionState == ConnectionState.done && snapshot.hasData){
                     if(snapshot.data.length > 0){
