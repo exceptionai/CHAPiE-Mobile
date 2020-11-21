@@ -37,11 +37,16 @@ class RobotModel {
     return map;
   }
 
+  String getServiceId(){
+    return _id;
+  }
+
   @override
   String toString() {
     // TODO: implement toString
     return "id : ${this.id}, nome : ${this.name}, done : ${this.done}                                                         ";
   }
+
 
   
 }

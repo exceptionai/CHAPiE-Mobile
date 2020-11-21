@@ -25,6 +25,7 @@ class _RobotListScreenState extends State<RobotListScreen> {
     futureRobot = service.getAllRobots();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,9 +37,11 @@ class _RobotListScreenState extends State<RobotListScreen> {
           onTap: () async {
             //Navigator.of(context).pushReplacementNamed('/schema');
             await service.endProductionOfRobots();
+            futureRobot = service.getAllRobots();
             setState(() {
               
             });
+            
           },
         ),
       )),
@@ -46,7 +49,6 @@ class _RobotListScreenState extends State<RobotListScreen> {
                 heroTag: "button",
                 onPressed: () async {                  
                   await Navigator.of(context).pushNamed('/new');
-                  setState(() {});
                 },
                 child: Icon(Icons.exposure_plus_1,color: Theme.of(context).accentColor,),
                 backgroundColor: Theme.of(context).primaryColor,

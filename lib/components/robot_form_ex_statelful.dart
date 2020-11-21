@@ -99,7 +99,7 @@ class _RobotForm2State extends State<RobotForm2> {
           }
         });
       }else{
-        Navigator.of(context).pushNamed('/');
+        Navigator.of(context).pushReplacementNamed('/');
       }
     }
 
@@ -112,13 +112,10 @@ class _RobotForm2State extends State<RobotForm2> {
     void _submit(int send) async{
       if (send == 1){
         for(int i = 0; i < int.parse(_quantityController.text); i++){
-          robotMap[DbConnection.robotTable["idColumn"]] = await widget.service.getNextID();
-          print(robotMap);
-          widget.service.saveRobot(RobotModel.fromMap(robotMap));
+          await widget.service.saveRobot(RobotModel.fromMap(robotMap));
         }
       }
-      await Navigator.of(context).pushNamed('/');
-      setState(() {});
+      await Navigator.of(context).pushReplacementNamed('/');
     }
   
 
@@ -202,6 +199,7 @@ class _RobotForm2State extends State<RobotForm2> {
                         Container(
                           width: 50,
                         ),
+                        
                         RaisedButton(
                           onPressed: () {
                             _next();
@@ -211,8 +209,10 @@ class _RobotForm2State extends State<RobotForm2> {
                             Icons.keyboard_arrow_right,
                             color: Theme.of(context).accentColor,
                           ),
+                          
                           color: Theme.of(context).primaryColor,
                           shape: RoundedRectangleBorder(
+                            
                             borderRadius: BorderRadius.circular(30.0),
                           ),
                         ),

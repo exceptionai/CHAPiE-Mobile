@@ -22,12 +22,19 @@ class CharpieService{
     return robots;
   }
 
-  void endProductionOfRobots() async{
-    List<RobotModel> rows = await robotRepository.getAll();
-    rows.forEach((element) {
-      element.done = 1;
-      robotRepository.update(element);
-    });
+  Future endProductionOfRobots() async{
+    List<RobotModel> robots = await getAllRobots();
+    for(var robot in robots){
+      robot.done = 1;
+      await endProductionOfRobot(robot.getServiceId(), robot);
+
+    }
+    
+    
+  }
+
+  endProductionOfRobot(String id, RobotModel robot) async{
+    await http.put('$chapieAPI/Robot/$id',headers: {'Content-type': 'application/json'}, body: json.encode(robot.toMap()));
   }
 
   Future<List<SchemaModel>> getAllSchemas() async{
@@ -49,14 +56,14 @@ class CharpieService{
      return id;
   }
 
-  Future<RobotModel> saveRobot(RobotModel model) async {
+  Future saveRobot(RobotModel model) async {
     await http.post('$chapieAPI/Robot',headers: {'Content-type': 'application/json'}, body: json.encode(model.toMap()));
-    return robotRepository.save(model);
   }
 
-  Future<SchemaModel> saveSchema(SchemaModel model) async {
-    await http.post('$chapieAPI/Schema',headers: {'Content-type': 'application/json'}, body: json.encode(model.toMap()));
-    return schemaRepository.save(model);
+  Future saveSchema(SchemaModel model) async {
+    if(model.name != null && model.description != null && model.schemaUrl != null){
+      await http.post('$chapieAPI/Schema',headers: {'Content-type': 'application/json'}, body: json.encode(model.toMap()));
+    }
   }
 
    Future<List<Map<String,Object>>> GenerateListSchemes() async {

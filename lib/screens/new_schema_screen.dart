@@ -30,9 +30,14 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
       floatingActionButton: FloatingActionButton(
                 heroTag: "button",
                 onPressed: () async {
-                  _saveSchema();
                   //setState(() {});
-                  Navigator.of(context).pushReplacementNamed('/schema');
+                  schema.name = _nameController.text;
+                  schema.description = _descriptionController.text;
+                   if(schema.name != null && schema.description != null && schema.schemaUrl != null && schema.name.isNotEmpty && schema.description.isNotEmpty && schema.schemaUrl.isNotEmpty){
+    
+                    _saveSchema();
+                    Navigator.of(context).pushReplacementNamed('/schema');
+                   }
                 },
                 child: Text("Salvar"),
                 backgroundColor: Theme.of(context).primaryColor,
@@ -220,9 +225,10 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
   }
 
   void _saveSchema() async {
-    schema.name = _nameController.text;
-    schema.description = _descriptionController.text;
-    await service.saveSchema(schema);
+    
+     await service.saveSchema(schema);
+    
+    
   }
 
 }

@@ -15,7 +15,6 @@ class SchemaListTile extends StatefulWidget {
 class _SchemaListTileState extends State<SchemaListTile> {
   Widget build(BuildContext context) {
     SchemaModel schemaModel = widget.schemaModel;
-    print(schemaModel);
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Theme.of(context).primaryColor),

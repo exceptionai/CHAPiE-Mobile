@@ -79,7 +79,7 @@ class _SchemaListScreenState extends State<SchemaListScreen> {
                             setState((){});
                           });
                         }
-                      );
+                      );  
                     }
                     return Center(child: Icon(Icons.sentiment_dissatisfied,color: Theme.of(context).primaryColor,size: 90,));
                   }
