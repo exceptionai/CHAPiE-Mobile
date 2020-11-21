@@ -67,7 +67,7 @@ class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
           action: Padding(
         padding: const EdgeInsets.all(8.0),
         child: InkWell(
-          child: Icon(Icons.arrow_left),
+          child: Icon(Icons.keyboard_return,size:35),
           onTap: () {
             Navigator.of(context).pushReplacementNamed('/');
           },
