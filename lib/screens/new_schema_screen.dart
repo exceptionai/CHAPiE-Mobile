@@ -22,7 +22,6 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
    
   @override
   Widget build(BuildContext context) {
-    print("teste");
     final widthScreen = MediaQuery.of(context).size.width;
     final heightScreen = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -31,8 +30,9 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
                 heroTag: "button",
                 onPressed: () async {
                   _saveSchema();
-                  //setState(() {});
-                  Navigator.of(context).pushReplacementNamed('/schema');
+                  
+                  await Navigator.of(context).pushNamed('/schema');
+                  setState(() {});            
                 },
                 child: Text("Salvar"),
                 backgroundColor: Theme.of(context).primaryColor,
@@ -43,7 +43,7 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
           child: InkWell(
             child:
                 Image.asset('assets/images/entregatrabalhos.png', height: 26),
-            onTap: () {
+            onTap: () {              
               Navigator.of(context).pushReplacementNamed('/scheme');
             },
           ),
@@ -138,7 +138,7 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
                       color: Theme.of(context).accentColor,
                       onPressed:() { 
                         _showImageOption(context);
-                        print(schema.schemaUrl);
+                    
                       },
                       child: (uploadedImage == false) ?
                         Column(
@@ -190,26 +190,14 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
                         if(file == null) return;                        
                         setState(() {                          
                           uploadedImage = true;
-                          schema.schemaUrl = file.path;
-                          Navigator.pop(context);
+                          schema.schemaUrl = file.path;                          
                         });
+                        Navigator.pop(context);
                       });
                     }, 
                     child: Text("galeria",style:TextStyle(color: Colors.red,fontSize: 20.0)),
                   )
-                  ,
-                    /*FlatButton(
-                    onPressed: (){
-                      ImagePicker.pickImage(source: ImageSource.camera).then((file){
-                        if(file == null) return;
-                        setState(() {
-                          schema.schemaUrl = file.path;
-                          Navigator.pop(context);
-                        });
-                      });
-                    }, 
-                    child: Text("camera",style:TextStyle(color: Colors.red,fontSize: 20.0)),
-                  )*/
+                  ,                   
                 ],
               ),
             );
@@ -224,11 +212,7 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
     schema.id = await service.getNextSchemaId();
     schema.name = _nameController.text;
     schema.description = _descriptionController.text;
-    print(schema.toString());
     await service.saveSchema(schema);
-    setState(() {
-     
-    });
   }
 
 }

@@ -38,7 +38,6 @@ class _RobotForm2State extends State<RobotForm2> {
       _currentField = widget.form.length - 1;
     } else {
       setState(() {
-        print(widget.form[_currentField]['field']);
         var option;
         if(widget.form[_currentField]['options'] != null){
           List options = widget.form[_currentField]['options'];
@@ -63,7 +62,6 @@ class _RobotForm2State extends State<RobotForm2> {
         if(widget.form[_currentField]['field'] == 'name' && _nameController.text == ''){
           _setInvalid();
         }else if(widget.form[_currentField]['field'] == 'quantity' && _quantityController.text == ''){
-          print('vazio');
           _setInvalid();
         }else{
           isInvalid = false;
@@ -113,7 +111,6 @@ class _RobotForm2State extends State<RobotForm2> {
       if (send == 1){
         for(int i = 0; i < int.parse(_quantityController.text); i++){
           robotMap[DbConnection.robotTable["idColumn"]] = await widget.service.getNextID();
-          print(robotMap);
           widget.service.saveRobot(RobotModel.fromMap(robotMap));
         }
       }
@@ -224,6 +221,7 @@ class _RobotForm2State extends State<RobotForm2> {
             ));
       } else {
         return Container(
+          
             padding: EdgeInsets.all(8.0),
             color: Theme.of(context).accentColor,
             width: MediaQuery.of(context).size.width,
@@ -246,10 +244,10 @@ class _RobotForm2State extends State<RobotForm2> {
                         ],),                                                  
                     ),                  
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.5,
+                      height: MediaQuery.of(context).size.height * 0.4,
                       width: 250,
-                      child: ListView.builder(
-                        itemCount: fieldOptions.length,
+                      child: ListView.builder(                        
+                        itemCount: fieldOptions.length,                        
                         itemBuilder: (context, index) {
                           return Container(
                             margin: EdgeInsets.only(top: 15),
@@ -258,12 +256,17 @@ class _RobotForm2State extends State<RobotForm2> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30),
                               ),
-                              child: Text(
+                              child: (widget.form[_currentField]['field'] == 'schemaUrl') ?
+                              Image.asset(fieldOptions[index]['value'],
+                              
+                              ) :
+                              Text(
                                 fieldOptions[index]['text'],
                                 style: TextStyle(
                                   color: Colors.black,
                                 ),
                               ),
+                              
                               onPressed: () {
                                 if (!submit) {
                                   _onPressed(index);
@@ -279,6 +282,8 @@ class _RobotForm2State extends State<RobotForm2> {
                         },
                       ),
                     ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

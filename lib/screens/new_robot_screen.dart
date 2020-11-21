@@ -29,9 +29,9 @@ class _NewRobotScreenState extends State<NewRobotScreen> {
       'field' : 'robotType',
       'options': [
         {'text': 'Android', 'value': 'android'},
-        {'text': 'Babysister', 'value': 'babysyster'},
-        {'text': 'Military', 'value': 'military'},
-        {'text': 'Worker', 'value': 'worker'}
+        {'text': 'Babá', 'value': 'babysyster'},
+        {'text': 'Militar', 'value': 'military'},
+        {'text': 'Operário', 'value': 'worker'}
       ],
     },
     {

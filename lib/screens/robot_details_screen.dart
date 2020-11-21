@@ -29,7 +29,7 @@ class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
           action: Padding(
         padding: const EdgeInsets.all(8.0),
         child: InkWell(
-          child: Icon(Icons.arrow_left),
+          child: Icon(Icons.keyboard_return_rounded,size:40),
           onTap: () {
             Navigator.of(context).pushReplacementNamed('/');
           },
@@ -38,9 +38,12 @@ class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
       floatingActionButton: FloatingActionButton(
         heroTag: "button",
         onPressed: () async {
-          setState(() {});
+          setState(() {
+            service.deleteRobot(widget.robotModel.id);
+            Navigator.of(context).pushReplacementNamed('/');
+          });
         },
-        child: Text("autodestruir"),
+        child: Icon(Icons.delete_forever_rounded,size:40,color: Theme.of(context).accentColor,),
         backgroundColor: Theme.of(context).primaryColor,
       ),
       drawer: DrawerFiapEx(
@@ -49,7 +52,7 @@ class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
       body: SingleChildScrollView(
           child: Container(
           margin: EdgeInsets.only(
-            left: widthScreen * 0.07,
+            left: widthScreen * 0.1,
           ),
           padding: EdgeInsets.all(8.0),
           color: Theme.of(context).accentColor,
@@ -126,7 +129,7 @@ class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
                         height: heightScreen * 0.01,
                       ),
                       Text(
-                        "Entregar droga",
+                        "Desempenhar \npapel de humano",
                         style: TextStyle(
                           fontSize: 20.0,
                           color: Theme.of(context).primaryColorLight,
@@ -242,12 +245,12 @@ class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
                           Text(
                             "Comunicação",
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 20, 
                               color:Colors.blue,
                             ),
                           ),
                           Text(
-                            "puta orador!",
+                            "Falador!",
                             style: TextStyle(
                               fontSize: 12,
                             ),                          
@@ -281,7 +284,7 @@ class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
                             ),
                           ),
                           Text(
-                            "Odeia seu humano!",
+                            "Não gosto do meu humano!",
                             style: TextStyle(
                               fontSize: 12,
                             ),                          

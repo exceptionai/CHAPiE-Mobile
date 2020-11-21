@@ -33,6 +33,10 @@ class CharpieService{
      return id;
    }
 
+  void deleteRobot(int id) async {
+    robotRepository.delete(id);
+  }
+
   getNextSchemaId() async {
      int id = await schemaRepository.getNextID();
      return id;
