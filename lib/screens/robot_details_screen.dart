@@ -250,7 +250,7 @@ class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
                             ),
                           ),
                           Text(
-                            "calmo,mas não abuse!",
+                            "Boa vizinhança!",
                             style: TextStyle(
                               fontSize: 12,
                             ),                          
@@ -284,7 +284,7 @@ class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
                             ),
                           ),
                           Text(
-                            "puta orador!",
+                            "Fala bem!",
                             style: TextStyle(
                               fontSize: 12,
                             ),                          
@@ -302,8 +302,8 @@ class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
                       CircularPercentIndicator(
                         radius: widthScreen * 0.17,
                         lineWidth: 3.0,
-                        percent: 0.05,
-                        center: new Text("5%"),
+                        percent: 0.7,
+                        center: new Text("70%"),
                         progressColor: Colors.yellow,
                       ),
                       Container(width: widthScreen * 0.02,),
@@ -318,7 +318,7 @@ class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
                             ),
                           ),
                           Text(
-                            "Odeia seu humano!",
+                            "companheiro do humano!",
                             style: TextStyle(
                               fontSize: 12,
                             ),                          

@@ -35,6 +35,9 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
                    if(schema.name != null && schema.description != null && schema.schemaUrl != null && schema.name.isNotEmpty && schema.description.isNotEmpty && schema.schemaUrl.isNotEmpty){
     
                     _saveSchema();
+                    setState(() {
+                      
+                    });
                     Navigator.of(context).pushReplacementNamed('/schema');
                    }
                 },
@@ -201,18 +204,6 @@ class _NewSchemaScreenState extends State<NewSchemaScreen> {
                     child: Text("galeria",style:TextStyle(color: Colors.red,fontSize: 20.0)),
                   )
                   ,
-                    /*FlatButton(
-                    onPressed: (){
-                      ImagePicker.pickImage(source: ImageSource.camera).then((file){
-                        if(file == null) return;
-                        setState(() {
-                          schema.schemaUrl = file.path;
-                          Navigator.pop(context);
-                        });
-                      });
-                    }, 
-                    child: Text("camera",style:TextStyle(color: Colors.red,fontSize: 20.0)),
-                  )*/
                 ],
               ),
             );
