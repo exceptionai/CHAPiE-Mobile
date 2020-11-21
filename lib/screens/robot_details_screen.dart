@@ -87,93 +87,95 @@ class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
       ),
       body: SingleChildScrollView(
           child: Container(
-          padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 55),
+          padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30),
           color: Theme.of(context).accentColor,
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Nome:",
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Theme.of(context).primaryColor,
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Nome:",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          textAlign: TextAlign.justify,
                         ),
-                        textAlign: TextAlign.justify,
-                      ),
-                      Container(
-                        height: heightScreen * 0.01,
-                      ),
-                      Text(
-                        "Tipo:",
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Theme.of(context).primaryColor,
+                        Container(
+                          height: heightScreen * 0.01,
                         ),
-                        textAlign: TextAlign.justify,
-                      ),
-                      Container(
-                        height: heightScreen * 0.01,
-                      ),
-                      Text(
-                        "Função:",
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Theme.of(context).primaryColor,
+                        Text(
+                          "Tipo:",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          textAlign: TextAlign.justify,
                         ),
-                        textAlign: TextAlign.justify,
-                      ),
-                      Container(
-                        height: heightScreen * 0.01,
-                      ),
-                    ],
-                  ),
-                  Container(
-                    width: widthScreen * 0.07,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.robotModel.name,
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Theme.of(context).primaryColorLight,
+                        Container(
+                          height: heightScreen * 0.01,
                         ),
-                        textAlign: TextAlign.justify,
-                      ),
-                      Container(
-                        height: heightScreen * 0.01,
-                      ),
-                      Text(
-                        widget.robotModel.name,
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Theme.of(context).primaryColorLight,
+                        Text(
+                          "Função:",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          textAlign: TextAlign.justify,
                         ),
-                        textAlign: TextAlign.justify,
-                      ),
-                      Container(
-                        height: heightScreen * 0.01,
-                      ),
-                      Text(
-                        "Entregar droga",
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Theme.of(context).primaryColorLight,
+                        Container(
+                          height: heightScreen * 0.01,
                         ),
-                        textAlign: TextAlign.justify,
-                      ),
-                      Container(
-                        height: heightScreen * 0.01,
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                    Container(
+                      width: widthScreen * 0.07,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.robotModel.name,
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Theme.of(context).primaryColorLight,
+                          ),
+                          textAlign: TextAlign.justify,
+                        ),
+                        Container(
+                          height: heightScreen * 0.01,
+                        ),
+                        Text(
+                          widget.robotModel.robotType,
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Theme.of(context).primaryColorLight,
+                          ),
+                          textAlign: TextAlign.justify,
+                        ),
+                        Container(
+                          height: heightScreen * 0.01,
+                        ),
+                        Text(
+                          "Travar batalhas",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Theme.of(context).primaryColorLight,
+                          ),
+                          textAlign: TextAlign.justify,
+                        ),
+                        Container(
+                          height: heightScreen * 0.01,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               Container(
                 height: heightScreen * 0.02,
@@ -248,7 +250,7 @@ class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
                             ),
                           ),
                           Text(
-                            "calmo,mas não abuse!",
+                            "Boa vizinhança!",
                             style: TextStyle(
                               fontSize: 12,
                             ),                          
@@ -282,7 +284,7 @@ class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
                             ),
                           ),
                           Text(
-                            "puta orador!",
+                            "Fala bem!",
                             style: TextStyle(
                               fontSize: 12,
                             ),                          
@@ -300,8 +302,8 @@ class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
                       CircularPercentIndicator(
                         radius: widthScreen * 0.17,
                         lineWidth: 3.0,
-                        percent: 0.05,
-                        center: new Text("5%"),
+                        percent: 0.7,
+                        center: new Text("70%"),
                         progressColor: Colors.yellow,
                       ),
                       Container(width: widthScreen * 0.02,),
@@ -316,7 +318,7 @@ class _RobotDetailsScreenState extends State<RobotDetailsScreen> {
                             ),
                           ),
                           Text(
-                            "Odeia seu humano!",
+                            "companheiro do humano!",
                             style: TextStyle(
                               fontSize: 12,
                             ),                          
